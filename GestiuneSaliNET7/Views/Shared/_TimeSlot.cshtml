@@ -1,0 +1,27 @@
+﻿@model GestiuneSaliNET7.Models.ReservationModel
+
+<div class="card">
+    @if (Model == null)
+    {
+        <div>
+            <div style="background-color: black; width: 1px;">
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex flex-column">
+            <div>
+                <p>
+                    @Model.Name
+                </p>
+            </div>
+            <div class="d-flex justify-content-end">
+                <p>
+                    @Model.RoomId
+                </p>
+            </div>
+        </div>
+    }
+
+</div>
