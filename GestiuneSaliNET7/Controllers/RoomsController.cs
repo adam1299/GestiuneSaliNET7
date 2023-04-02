@@ -10,6 +10,8 @@ using GestiuneSaliNET7.Models;
 
 namespace GestiuneSaliNET7.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class RoomsController : Controller
     {
         private readonly ApplicationDBContext _context;
@@ -23,7 +25,7 @@ namespace GestiuneSaliNET7.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Rooms != null ? 
-                          View(await _context.Rooms.ToListAsync()) :
+                          Ok(await _context.Rooms.ToListAsync()) :
                           Problem("Entity set 'ApplicationDBContext.Rooms'  is null.");
         }
 
@@ -42,13 +44,13 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(roomModel);
+            return Ok(roomModel);
         }
 
         // GET: Rooms/Create
         public IActionResult Create()
         {
-            return View();
+            return Ok();
         }
 
         // POST: Rooms/Create
@@ -64,7 +66,7 @@ namespace GestiuneSaliNET7.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(roomModel);
+            return Ok(roomModel);
         }
 
         // GET: Rooms/Edit/5
@@ -80,7 +82,7 @@ namespace GestiuneSaliNET7.Controllers
             {
                 return NotFound();
             }
-            return View(roomModel);
+            return Ok(roomModel);
         }
 
         // POST: Rooms/Edit/5
@@ -115,7 +117,7 @@ namespace GestiuneSaliNET7.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(roomModel);
+            return Ok(roomModel);
         }
 
         // GET: Rooms/Delete/5
@@ -133,7 +135,7 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(roomModel);
+            return Ok(roomModel);
         }
 
         // POST: Rooms/Delete/5

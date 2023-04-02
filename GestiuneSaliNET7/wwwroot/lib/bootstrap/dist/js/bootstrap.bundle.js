@@ -1931,7 +1931,7 @@
   var start = 'start';
   var end = 'end';
   var clippingParents = 'clippingParents';
-  var viewport = 'viewport';
+  var Okport = 'Okport';
   var popper = 'popper';
   var reference = 'reference';
   var variationPlacements = /*#__PURE__*/basePlacements.reduce(function (acc, placement) {
@@ -1965,7 +1965,7 @@
 
     if (node.toString() !== '[object Window]') {
       var ownerDocument = node.ownerDocument;
-      return ownerDocument ? ownerDocument.defaultView || window : window;
+      return ownerDocument ? ownerDocument.defaultOk || window : window;
     }
 
     return node;
@@ -2201,7 +2201,7 @@
     var isIE = navigator.userAgent.indexOf('Trident') !== -1;
 
     if (isIE && isHTMLElement(element)) {
-      // In IE 9, 10 and 11 fixed elements containing block is always established by the viewport
+      // In IE 9, 10 and 11 fixed elements containing block is always established by the Okport
       var elementCss = getComputedStyle$1(element);
 
       if (elementCss.position === 'fixed') {
@@ -2576,7 +2576,7 @@
   }
 
   function getWindowScrollBarX(element) {
-    // If <html> has a CSS width greater than the viewport, then this will be
+    // If <html> has a CSS width greater than the Okport, then this will be
     // incorrect for RTL.
     // Popper 1 is broken in this case and never had a bug report so let's assume
     // it's not an issue. I don't think anyone ever specifies width on <html>
@@ -2586,10 +2586,10 @@
     return getBoundingClientRect(getDocumentElement(element)).left + getWindowScroll(element).scrollLeft;
   }
 
-  function getViewportRect(element) {
+  function getOkportRect(element) {
     var win = getWindow(element);
     var html = getDocumentElement(element);
-    var visualViewport = win.visualViewport;
+    var visualOkport = win.visualOkport;
     var width = html.clientWidth;
     var height = html.clientHeight;
     var x = 0;
@@ -2599,20 +2599,20 @@
     // if it isn't open, so if this isn't available, the popper will be detected
     // to overflow the bottom of the screen too early.
 
-    if (visualViewport) {
-      width = visualViewport.width;
-      height = visualViewport.height; // Uses Layout Viewport (like Chrome; Safari does not currently)
+    if (visualOkport) {
+      width = visualOkport.width;
+      height = visualOkport.height; // Uses Layout Okport (like Chrome; Safari does not currently)
       // In Chrome, it returns a value very close to 0 (+/-) but contains rounding
       // errors due to floating point numbers, so we need to check precision.
       // Safari returns a number <= 0, usually < -1 when pinch-zoomed
       // Feature detection fails in mobile emulation mode in Chrome.
-      // Math.abs(win.innerWidth / visualViewport.scale - visualViewport.width) <
+      // Math.abs(win.innerWidth / visualOkport.scale - visualOkport.width) <
       // 0.001
       // Fallback here: "Not Safari" userAgent
 
       if (!/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) {
-        x = visualViewport.offsetLeft;
-        y = visualViewport.offsetTop;
+        x = visualOkport.offsetLeft;
+        y = visualOkport.offsetTop;
       }
     }
 
@@ -2689,7 +2689,7 @@
     var scrollParent = getScrollParent(element);
     var isBody = scrollParent === ((_element$ownerDocumen = element.ownerDocument) == null ? void 0 : _element$ownerDocumen.body);
     var win = getWindow(scrollParent);
-    var target = isBody ? [win].concat(win.visualViewport || [], isScrollParent(scrollParent) ? scrollParent : []) : scrollParent;
+    var target = isBody ? [win].concat(win.visualOkport || [], isScrollParent(scrollParent) ? scrollParent : []) : scrollParent;
     var updatedList = list.concat(target);
     return isBody ? updatedList : // $FlowFixMe[incompatible-call]: isBody tells us target will be an HTMLElement here
     updatedList.concat(listScrollParents(getParentNode(target)));
@@ -2718,7 +2718,7 @@
   }
 
   function getClientRectFromMixedType(element, clippingParent) {
-    return clippingParent === viewport ? rectToClientRect(getViewportRect(element)) : isHTMLElement(clippingParent) ? getInnerBoundingClientRect(clippingParent) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
+    return clippingParent === Okport ? rectToClientRect(getOkportRect(element)) : isHTMLElement(clippingParent) ? getInnerBoundingClientRect(clippingParent) : rectToClientRect(getDocumentRect(getDocumentElement(element)));
   } // A "clipping parent" is an overflowable container with the characteristic of
   // clipping (or hiding) overflowing elements with a position different from
   // `initial`
@@ -2840,7 +2840,7 @@
         _options$boundary = _options.boundary,
         boundary = _options$boundary === void 0 ? clippingParents : _options$boundary,
         _options$rootBoundary = _options.rootBoundary,
-        rootBoundary = _options$rootBoundary === void 0 ? viewport : _options$rootBoundary,
+        rootBoundary = _options$rootBoundary === void 0 ? Okport : _options$rootBoundary,
         _options$elementConte = _options.elementContext,
         elementContext = _options$elementConte === void 0 ? popper : _options$elementConte,
         _options$altBoundary = _options.altBoundary,
@@ -3672,7 +3672,7 @@
     start: start,
     end: end,
     clippingParents: clippingParents,
-    viewport: viewport,
+    Okport: Okport,
     popper: popper,
     reference: reference,
     variationPlacements: variationPlacements,

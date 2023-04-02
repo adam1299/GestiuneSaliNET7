@@ -11,6 +11,8 @@ using GestiuneSaliNET7.Utils;
 
 namespace GestiuneSaliNET7.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class UserModelsController : Controller
     {
         private readonly ApplicationDBContext _context;
@@ -24,7 +26,7 @@ namespace GestiuneSaliNET7.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Users != null ? 
-                          View(await _context.Users.ToListAsync()) :
+                          Ok(await _context.Users.ToListAsync()) :
                           Problem("Entity set 'ApplicationDBContext.Users'  is null.");
         }
 
@@ -43,13 +45,13 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(userModel);
+            return Ok(userModel);
         }
 
         // GET: UserModels/Create
         public IActionResult Create()
         {
-            return View();
+            return Ok();
         }
 
         // POST: UserModels/Create
@@ -66,7 +68,7 @@ namespace GestiuneSaliNET7.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(userModel);
+            return Ok(userModel);
         }
 
         // GET: UserModels/Edit/5
@@ -82,7 +84,7 @@ namespace GestiuneSaliNET7.Controllers
             {
                 return NotFound();
             }
-            return View(userModel);
+            return Ok(userModel);
         }
 
         // POST: UserModels/Edit/5
@@ -117,7 +119,7 @@ namespace GestiuneSaliNET7.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(userModel);
+            return Ok(userModel);
         }
 
         // GET: UserModels/Delete/5
@@ -135,7 +137,7 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(userModel);
+            return Ok(userModel);
         }
 
         // POST: UserModels/Delete/5

@@ -10,6 +10,8 @@ using GestiuneSaliNET7.Models;
 
 namespace GestiuneSaliNET7.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class LabRoomsController : Controller
     {
         private readonly ApplicationDBContext _context;
@@ -20,14 +22,16 @@ namespace GestiuneSaliNET7.Controllers
         }
 
         // GET: LabRooms
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public async Task<IActionResult> Get()
         {
               return _context.Labs != null ? 
-                          View(await _context.Labs.ToListAsync()) :
+                          Ok(await _context.Labs.ToListAsync()) :
                           Problem("Entity set 'ApplicationDBContext.Labs'  is null.");
         }
 
         // GET: LabRooms/Details/5
+        [HttpGet]
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Labs == null)
@@ -42,13 +46,14 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(labRoomModel);
+            return Ok(labRoomModel);
         }
 
-        // GET: LabRooms/Create
+        // POST: LabRooms/Create
+        [HttpPost]
         public IActionResult Create()
         {
-            return View();
+            return Ok();
         }
 
         // POST: LabRooms/Create
@@ -64,10 +69,11 @@ namespace GestiuneSaliNET7.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(labRoomModel);
+            return Ok(labRoomModel);
         }
 
         // GET: LabRooms/Edit/5
+        [HttpGet]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.Labs == null)
@@ -80,7 +86,7 @@ namespace GestiuneSaliNET7.Controllers
             {
                 return NotFound();
             }
-            return View(labRoomModel);
+            return Ok(labRoomModel);
         }
 
         // POST: LabRooms/Edit/5
@@ -115,10 +121,11 @@ namespace GestiuneSaliNET7.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(labRoomModel);
+            return Ok(labRoomModel);
         }
 
         // GET: LabRooms/Delete/5
+        [HttpGet]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Labs == null)
@@ -133,7 +140,7 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(labRoomModel);
+            return Ok(labRoomModel);
         }
 
         // POST: LabRooms/Delete/5

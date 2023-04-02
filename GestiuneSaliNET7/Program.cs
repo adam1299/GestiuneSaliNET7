@@ -12,10 +12,14 @@ builder.Services.AddDbContext<ApplicationDBContext>(options =>
 builder.Services.AddScoped<ILogin, AuthenticateLogin>();
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {

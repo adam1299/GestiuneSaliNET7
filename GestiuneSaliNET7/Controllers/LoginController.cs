@@ -6,8 +6,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 
+/*
 namespace GestiuneSaliNET7.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class LoginController : Controller
     {
         private readonly ApplicationDBContext _context;
@@ -20,7 +23,7 @@ namespace GestiuneSaliNET7.Controllers
         }
         public IActionResult Index()
         {
-            return View();
+            return Ok();
         }
 
         [HttpPost]
@@ -30,21 +33,21 @@ namespace GestiuneSaliNET7.Controllers
 
             if (issuccess.Result != null)
             {
-                ViewBag.username = string.Format("Successfully logged-in", email);
+                OkBag.username = string.Format("Successfully logged-in", email);
 
                 TempData["email"] = email;
                 return RedirectToAction("Index", "Layout", new { area = "Home"});
             }
             else
             {
-                ViewBag.username = string.Format("Login Failed ", email);
-                return View();
+                OkBag.username = string.Format("Login Failed ", email);
+                return Ok();
             }
         }
 
         public IActionResult Register()
         {
-            return View();
+            return Ok();
         }
 
         [HttpPost]
@@ -58,7 +61,7 @@ namespace GestiuneSaliNET7.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View();
+            return Ok();
         }
 
         [HttpPost]
@@ -71,18 +74,19 @@ namespace GestiuneSaliNET7.Controllers
 
                 if (issuccess.Result != null)
                 {
-                    ViewBag.username = string.Format("Successfully logged-in", userModel.Email);
+                    OkBag.username = string.Format("Successfully logged-in", userModel.Email);
 
                     TempData["email"] = userModel.Email;
                     return RedirectToAction("Index", "Layout");
                 }
                 else
                 {
-                    ViewBag.username = string.Format("Login Failed ", userModel.Email);
-                    return View();
+                    OkBag.username = string.Format("Login Failed ", userModel.Email);
+                    return Ok();
                 }
             }
-            return View();
+            return Ok();
         }
     }
 }
+*/

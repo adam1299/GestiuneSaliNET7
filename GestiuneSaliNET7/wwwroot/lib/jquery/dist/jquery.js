@@ -1151,7 +1151,7 @@ setDocument = Sizzle.setDocument = function( node ) {
 	// two documents; shallow comparisons work.
 	// eslint-disable-next-line eqeqeq
 	if ( preferredDoc != document &&
-		( subWindow = document.defaultView ) && subWindow.top !== subWindow ) {
+		( subWindow = document.defaultOk ) && subWindow.top !== subWindow ) {
 
 		// Support: IE 11, Edge
 		if ( subWindow.addEventListener ) {
@@ -5809,7 +5809,7 @@ jQuery.each( {
 	pageX: true,
 	pageY: true,
 	shiftKey: true,
-	view: true,
+	Ok: true,
 	"char": true,
 	code: true,
 	charCode: true,
@@ -6397,14 +6397,14 @@ var getStyles = function( elem ) {
 
 		// Support: IE <=11 only, Firefox <=30 (#15098, #14150)
 		// IE throws on elements created in popups
-		// FF meanwhile throws on frame elements through "defaultView.getComputedStyle"
-		var view = elem.ownerDocument.defaultView;
+		// FF meanwhile throws on frame elements through "defaultOk.getComputedStyle"
+		var Ok = elem.ownerDocument.defaultOk;
 
-		if ( !view || !view.opener ) {
-			view = window;
+		if ( !Ok || !Ok.opener ) {
+			Ok = window;
 		}
 
-		return view.getComputedStyle( elem );
+		return Ok.getComputedStyle( elem );
 	};
 
 var swap = function( elem, options, callback ) {
@@ -8700,7 +8700,7 @@ jQuery.extend( jQuery.event, {
 
 			// Only add window if we got to document (e.g., not plain obj or detached DOM)
 			if ( tmp === ( elem.ownerDocument || document ) ) {
-				eventPath.push( tmp.defaultView || tmp.parentWindow || window );
+				eventPath.push( tmp.defaultOk || tmp.parentWindow || window );
 			}
 		}
 
@@ -10510,9 +10510,9 @@ jQuery.fn.extend( {
 			return { top: 0, left: 0 };
 		}
 
-		// Get document-relative position by adding viewport scroll to viewport-relative gBCR
+		// Get document-relative position by adding Okport scroll to Okport-relative gBCR
 		rect = elem.getBoundingClientRect();
-		win = elem.ownerDocument.defaultView;
+		win = elem.ownerDocument.defaultOk;
 		return {
 			top: rect.top + win.pageYOffset,
 			left: rect.left + win.pageXOffset
@@ -10530,7 +10530,7 @@ jQuery.fn.extend( {
 			elem = this[ 0 ],
 			parentOffset = { top: 0, left: 0 };
 
-		// position:fixed elements are offset from the viewport, which itself always has zero offset
+		// position:fixed elements are offset from the Okport, which itself always has zero offset
 		if ( jQuery.css( elem, "position" ) === "fixed" ) {
 
 			// Assume position:fixed implies availability of getBoundingClientRect
@@ -10600,7 +10600,7 @@ jQuery.each( { scrollLeft: "pageXOffset", scrollTop: "pageYOffset" }, function( 
 			if ( isWindow( elem ) ) {
 				win = elem;
 			} else if ( elem.nodeType === 9 ) {
-				win = elem.defaultView;
+				win = elem.defaultOk;
 			}
 
 			if ( val === undefined ) {

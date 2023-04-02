@@ -6,6 +6,8 @@ using System.Text.Json;
 
 namespace GestiuneSaliNET7.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ScheduleController : Controller
     {
         private readonly ApplicationDBContext _context;

@@ -10,6 +10,8 @@ using GestiuneSaliNET7.Models;
 
 namespace GestiuneSaliNET7.Controllers
 {
+    [ApiController]
+    [Route("[controller]")]
     public class ReservationModelController : Controller
     {
         private readonly ApplicationDBContext _context;
@@ -23,7 +25,7 @@ namespace GestiuneSaliNET7.Controllers
         public async Task<IActionResult> Index()
         {
               return _context.Reservations != null ? 
-                          View(await _context.Reservations.ToListAsync()) :
+                          Ok(await _context.Reservations.ToListAsync()) :
                           Problem("Entity set 'ApplicationDBContext.Reservations'  is null.");
         }
 
@@ -42,13 +44,13 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(reservationModel);
+            return Ok(reservationModel);
         }
 
         // GET: ReservationModel/Create
         public IActionResult Create()
         {
-            return View();
+            return Ok();
         }
 
         // POST: ReservationModel/Create
@@ -64,7 +66,7 @@ namespace GestiuneSaliNET7.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(reservationModel);
+            return Ok(reservationModel);
         }
 
         // GET: ReservationModel/Edit/5
@@ -80,7 +82,7 @@ namespace GestiuneSaliNET7.Controllers
             {
                 return NotFound();
             }
-            return View(reservationModel);
+            return Ok(reservationModel);
         }
 
         // POST: ReservationModel/Edit/5
@@ -115,7 +117,7 @@ namespace GestiuneSaliNET7.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(reservationModel);
+            return Ok(reservationModel);
         }
 
         // GET: ReservationModel/Delete/5
@@ -133,7 +135,7 @@ namespace GestiuneSaliNET7.Controllers
                 return NotFound();
             }
 
-            return View(reservationModel);
+            return Ok(reservationModel);
         }
 
         // POST: ReservationModel/Delete/5
